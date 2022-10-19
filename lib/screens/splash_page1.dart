@@ -16,7 +16,7 @@ class _SplashPage1State extends State<SplashPage1> {
   @override
   Widget build(BuildContext context) {
      Future.delayed(
-      Duration(seconds: 5),
+      const Duration(seconds: 5),
       () => Navigator.push(context, MaterialPageRoute(builder: (context) => DrugsPage())),
     );
     return Scaffold(
@@ -25,7 +25,7 @@ class _SplashPage1State extends State<SplashPage1> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            color: MyColors.C_2F80ED,
+            color: MyColors.c_2F80ED,
             child: SvgPicture.asset(MyImages.iconBackground, fit: BoxFit.cover,),
           ),
           Center(

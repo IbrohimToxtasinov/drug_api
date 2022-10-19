@@ -1,5 +1,8 @@
+import 'package:drugs_app/models/drugs/korzinka_model.dart';
+import 'package:drugs_app/screens/cart_page.dart';
 import 'package:drugs_app/screens/category_Listing.dart';
 import 'package:drugs_app/screens/splash_page1.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: const SplashPage1(),
+      home: const DrugsPage(),
     );
   }
 }

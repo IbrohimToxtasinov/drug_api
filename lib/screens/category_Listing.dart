@@ -104,7 +104,7 @@ class _DrugsPageState extends State<DrugsPage> {
   Widget buldButton(users, index) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => DrugInfo(getResult: users[index])));
+        Navigator.push(context, MaterialPageRoute(builder: (_) => DrugInfo(medicineId: users[index].id,)));
       },
       child: Container(
         width: double.infinity,
