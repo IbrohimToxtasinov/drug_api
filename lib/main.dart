@@ -1,4 +1,5 @@
 import 'package:drugs_app/models/drugs/korzinka_model.dart';
+import 'package:drugs_app/screens/Success.dart';
 import 'package:drugs_app/screens/cart_page.dart';
 import 'package:drugs_app/screens/category_Listing.dart';
 import 'package:drugs_app/screens/splash_page1.dart';
