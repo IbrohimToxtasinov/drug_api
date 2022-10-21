@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:drugs_app/models/drugs/drugs_model.dart';
+import 'package:drugs_app/screens/admin_page.dart';
 import 'package:drugs_app/screens/drug_details.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -51,7 +52,9 @@ class _DrugsPageState extends State<DrugsPage> {
           child: const Icon(Icons.arrow_back_sharp,)),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AdminPage()));
+            },
             child: Icon(Icons.search,),
           ),
           SizedBox(width: 12,),

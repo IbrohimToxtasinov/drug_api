@@ -1,4 +1,5 @@
 import 'package:drugs_app/screens/category_Listing.dart';
+import 'package:drugs_app/screens/home_page.dart';
 import 'package:drugs_app/utils/colors.dart';
 import 'package:drugs_app/utils/images.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class _SuccessPageState extends State<SuccessPage> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DrugsPage())),
+      () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage())),
     );
   }
   @override
