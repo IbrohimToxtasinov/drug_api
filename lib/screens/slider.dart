@@ -1,7 +1,5 @@
 import 'package:drugs_app/utils/colors.dart';
-import 'package:drugs_app/utils/images.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SliderPage extends StatelessWidget {
   final String title;

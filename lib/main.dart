@@ -5,6 +5,7 @@ import 'package:drugs_app/screens/category_Listing.dart';
 import 'package:drugs_app/screens/home_page.dart';
 import 'package:drugs_app/screens/onboarding_page.dart';
 import 'package:drugs_app/screens/splash_page1.dart';
+import 'package:drugs_app/screens/welcome_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: const SplashPage1(),
+      home: const WelcomePage(),
     );
   }
 }
