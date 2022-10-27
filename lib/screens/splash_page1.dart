@@ -1,9 +1,10 @@
-import 'package:drugs_app/screens/category_Listing.dart';
-import 'package:drugs_app/screens/onboarding_page.dart';
+import 'package:drugs_app/screens/home_page.dart';
+import 'package:drugs_app/screens/login_page.dart';
 import 'package:drugs_app/utils/colors.dart';
 import 'package:drugs_app/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage1 extends StatefulWidget {
   const SplashPage1({super.key});
@@ -13,20 +14,40 @@ class SplashPage1 extends StatefulWidget {
 }
 
 class _SplashPage1State extends State<SplashPage1> {
+  bool isLog = false;
+
+  Future<bool> isLoggedIn() async {
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    isLog = _pref.getBool("LoginedIn") ?? false;
+    return _pref.getBool("LoginedIn") ?? false;
+  }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 5),
-      () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const OnboardingPage())),
-    );
+
+    isLoggedIn();
+    goNext();
+  }
+
+  void goNext() {
+    Future.delayed(Duration(seconds: 3)).then((value) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) {
+            return isLog ? HomePage() : LoginPage();
+          },
+        ),
+      );
+    });
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Stack(

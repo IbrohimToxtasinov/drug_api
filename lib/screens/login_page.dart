@@ -3,6 +3,7 @@ import 'package:drugs_app/screens/create_account.dart';
 import 'package:drugs_app/screens/home_page.dart';
 import 'package:drugs_app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -82,11 +83,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   InkWell(
                     onTap: () async {
-                      if(_formkey.currentState!.validate()){
+                      if(_formkey.currentState!.validate()) {
                           print(controller1.text);
                           await StorageRepository.saveString("name", controller1.text);
                           await StorageRepository.saveString("password", controller1.text);
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
+                        saveLogin(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Successfully Logined')),
                         );
@@ -179,5 +180,12 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+  void saveLogin(context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool("LoginedIn", true);
+
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const HomePage()));
   }
 }
