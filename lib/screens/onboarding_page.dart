@@ -1,6 +1,7 @@
 import 'package:drugs_app/screens/category_Listing.dart';
 import 'package:drugs_app/screens/home_page.dart';
 import 'package:drugs_app/screens/slider.dart';
+import 'package:drugs_app/screens/welcome_page.dart';
 import 'package:drugs_app/utils/images.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 onTap: () {
                   if(_currentPage == (_pages.length - 1)){
                     Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const HomePage()));
+                      context, MaterialPageRoute(builder: (context) => const WelcomePage()));
                   }
                   else {
                     _controller.nextPage(

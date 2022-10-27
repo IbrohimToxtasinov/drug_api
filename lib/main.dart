@@ -1,3 +1,4 @@
+import 'package:drugs_app/datas/shared_preferens.dart';
 import 'package:drugs_app/models/drugs/korzinka_model.dart';
 import 'package:drugs_app/screens/Success.dart';
 import 'package:drugs_app/screens/cart_page.dart';
@@ -10,13 +11,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  StorageRepository.getInstance();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: const WelcomePage(),
+      home: const SplashPage1(),
     );
   }
 }

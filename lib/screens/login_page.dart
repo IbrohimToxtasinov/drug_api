@@ -1,9 +1,8 @@
-import 'package:drugs_app/screens/category_Listing.dart';
+import 'package:drugs_app/datas/shared_preferens.dart';
 import 'package:drugs_app/screens/create_account.dart';
+import 'package:drugs_app/screens/home_page.dart';
 import 'package:drugs_app/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +11,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 final _formkey = GlobalKey<FormState>();
+final controller1 = TextEditingController();
+final controller2 = TextEditingController();
 class _LoginPageState extends State<LoginPage> {
   bool isvisiblity = true;
   @override
@@ -54,12 +55,12 @@ class _LoginPageState extends State<LoginPage> {
                     height: 60,
                   ),
                   buildTextField("Username", Icons.person, false, false,
-                      TextInputAction.next, "Enter your Username"),
+                      TextInputAction.next, "Enter your Username", controller1),
                   const SizedBox(
                     height: 50,
                   ),
                   buildTextField("Password", Icons.lock, true, isvisiblity,
-                      TextInputAction.done, "Enter your Password"),
+                      TextInputAction.done, "Enter your Password", controller2),
                   const SizedBox(
                     height: 15,
                   ),
@@ -80,9 +81,12 @@ class _LoginPageState extends State<LoginPage> {
                     height: 24,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if(_formkey.currentState!.validate()){
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => DrugsPage()));
+                          print(controller1.text);
+                          await StorageRepository.saveString("name", controller1.text);
+                          await StorageRepository.saveString("password", controller1.text);
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const HomePage()));
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Successfully Logined')),
                         );
@@ -112,8 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => const CreateAccountPage()));
+                        //Navigator.pushReplacement(context,
+                            //MaterialPageRoute(builder: (_) => const CreateAccountPage()));
                       },
                       child: Text("< Don’t have an account? Sign Up",
                           style: TextStyle(
@@ -134,8 +138,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget buildTextField(String name, IconData icon, bool scht, bool obsecure,
-      TextInputAction choose, String errorname) {
+      TextInputAction choose, String errorname,TextEditingController controller) {
     return TextFormField(
+      controller: controller,
       style: const TextStyle(color: Colors.black),
       keyboardType: TextInputType.text,
       textInputAction: choose,

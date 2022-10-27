@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:drugs_app/datas/shared_preferens.dart';
 import 'package:drugs_app/models/drugs/drugs_model.dart';
 import 'package:drugs_app/screens/admin_page.dart';
 import 'package:drugs_app/screens/drug_details.dart';
@@ -29,12 +30,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String name = StorageRepository.getString("name");
     return Scaffold(
       backgroundColor:const Color(0xFFCBCBCB),
       appBar: AppBar(
         elevation: 0,
         backgroundColor:const Color(0xFFCBCBCB),
-        title: const Text("Drugs"),
+        title: Text("Hi $name"),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -43,18 +45,18 @@ class _HomePageState extends State<HomePage> {
           });
         },
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: FutureBuilder<List<DrugsModel>>(
             future: getMedicineList(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<DrugsModel>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasData) {
                 return myGrid(snapshot.data!);
               }
-              return Center(
+              return const Center(
                 child: Text("nimadir ishkal"),
               );
             },
@@ -64,18 +66,18 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (_) => AdminPage()));
+              context, MaterialPageRoute(builder: (_) => const AdminPage()));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 
   Widget myGrid(List<DrugsModel> medicineList) {
     return GridView.builder(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
@@ -88,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             direction: DismissDirection.startToEnd,
             background: Container(
               color: Colors.red,
-              child: Center(
+              child: const Center(
                 child: Icon(
                   Icons.delete,
                   color: Colors.white,
@@ -150,8 +152,8 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Delete ??"),
-            content: Text("Rostdan ham o'chirmoqchimisiz ?"),
+            title: const Text("Delete ??"),
+            content: const Text("Rostdan ham o'chirmoqchimisiz ?"),
             actions: [
               TextButton(
                   onPressed: () {
@@ -159,13 +161,13 @@ class _HomePageState extends State<HomePage> {
                       Navigator.pop(context);
                     });
                   },
-                  child: Text("No")),
+                  child: const Text("No")),
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                     callDelete(id);
                   },
-                  child: Text("Yes")),
+                  child: const Text("Yes")),
             ],
           );
         });

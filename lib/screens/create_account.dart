@@ -1,7 +1,7 @@
+import 'package:drugs_app/screens/login_page.dart';
+import 'package:drugs_app/screens/verify_otp.dart';
 import 'package:drugs_app/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
@@ -11,8 +11,12 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
-  bool isvisiblity = true;
-  final _formkey = GlobalKey<FormState>();
+bool isvisiblity = true;
+final _formkey = GlobalKey<FormState>();
+final controller1 = TextEditingController();
+final controller2 = TextEditingController();
+final controller3 = TextEditingController();
+final controller4 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -54,31 +58,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     height: 30,
                   ),
                   buildTextField("Your Name", false, false,
-                      TextInputAction.next, "Enter your Name"),
+                      TextInputAction.next, "Enter your Name", TextInputType.text, controller1),
                   const SizedBox(
                     height: 30,
                   ),
                   buildTextField("Mobile Number", false, false,
-                      TextInputAction.next, "Enter your Mobile Number"),
+                      TextInputAction.next, "Enter your Mobile Number", TextInputType.phone, controller2),
                   const SizedBox(
                     height: 30,
                   ),
                   buildTextField("Email", false, false,
-                      TextInputAction.next, "Enter your Email"),
+                      TextInputAction.next, "Enter your Email", TextInputType.emailAddress, controller3),
                   const SizedBox(
                     height: 30,
                   ),
                   buildTextField("Password", true, isvisiblity,
-                      TextInputAction.done, "Enter your Password"),
+                      TextInputAction.done, "Enter your Password", TextInputType.visiblePassword, controller4),
                   const SizedBox(
                     height: 24,
                   ),
                   InkWell(
                     onTap: () {
                       if(_formkey.currentState!.validate()){
-                    
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Successfully Logined')),
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const VerifyOtpPage()));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Successfully Logined')),
                     );
                   }
                     },
@@ -106,10 +110,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
+                       Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => const CreateAccountPage()));
+                                builder: (_) => const LoginPage()));
                       },
                       child: Text("< Already have account?  Login",
                           style: TextStyle(
@@ -130,10 +134,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   }
 
   Widget buildTextField(String name, bool scht, bool obsecure,
-      TextInputAction choose, String errorname) {
+      TextInputAction choose, String errorname, TextInputType choose1, TextEditingController controller) {
     return TextFormField(
       style: const TextStyle(color: Colors.black),
-      keyboardType: TextInputType.text,
+      controller: controller,
+      keyboardType: choose1,
       textInputAction: choose,
       obscureText: obsecure,
       validator: (value) {
