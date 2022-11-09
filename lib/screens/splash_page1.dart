@@ -1,5 +1,5 @@
 import 'package:drugs_app/screens/home_page.dart';
-import 'package:drugs_app/screens/login_page.dart';
+import 'package:drugs_app/screens/onboarding_page.dart';
 import 'package:drugs_app/utils/colors.dart';
 import 'package:drugs_app/utils/images.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +17,9 @@ class _SplashPage1State extends State<SplashPage1> {
   bool isLog = false;
 
   Future<bool> isLoggedIn() async {
-    SharedPreferences _pref = await SharedPreferences.getInstance();
-    isLog = _pref.getBool("LoginedIn") ?? false;
-    return _pref.getBool("LoginedIn") ?? false;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    isLog = pref.getBool("LoginedIn") ?? false;
+    return pref.getBool("LoginedIn") ?? false;
   }
 
   @override
@@ -31,12 +31,12 @@ class _SplashPage1State extends State<SplashPage1> {
   }
 
   void goNext() {
-    Future.delayed(Duration(seconds: 3)).then((value) {
+    Future.delayed(const Duration(seconds: 3)).then((value) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (_) {
-            return isLog ? HomePage() : LoginPage();
+            return isLog ? const HomePage() : const OnboardingPage();
           },
         ),
       );
@@ -89,5 +89,3 @@ class _SplashPage1State extends State<SplashPage1> {
     );
   }
 }
-
-
